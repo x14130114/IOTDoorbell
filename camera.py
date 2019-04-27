@@ -1,3 +1,4 @@
+from RPi import GPIO
 from picamera import PiCamera
 from time import sleep
 from datetime import datetime
@@ -20,16 +21,21 @@ print(pb.devices)
 # set your device
 huawei = pb.get_device('HUAWEI HMA-L29')
 
-button = Button(18)
-camera = PiCamera()
-now = datetime.now()
-filename = ''
-
+#button = Button(18)
+#camera = PiCamera()
+#now = datetime.now()
+#filename = ''
 
 class bellcam:
+    #camera = PiCamera()
+    now = datetime.now()
+    button = Button(18)
+    filename = ''
 
     def take_photo(self):
         global filename
+        camera = PiCamera()
+        #global camera
         # change this naming convention as it is not working
         filename = 'bell.jpg'
         camera.resolution = (800, 600)
@@ -37,7 +43,7 @@ class bellcam:
         # camera.start_preview()
         # sleep(1)
         camera.capture('/home/pi/Desktop/DoorbellIoT/SPdoorbell/' + (filename))
-        # camera.stop_preview
+        camera.close()
         bellcam.push_notification(self)
 
     # when button is pressed, send_push notification to phone via pushbullet api
@@ -58,14 +64,19 @@ class bellcam:
 
     def bell_pressed(self):
         while True:
-            print(button.value)
+            global camera
+            print(bellcam.button.value)
             time.sleep(2)
             # button.when_released
-            if button.value is True:
+            if bellcam.button.value is True:
                 bellcam.take_photo(self)
 
     def set_btn(self):
-        btn = button.value
+        #GPIO.setmode(GPIO.BCM)
+        #GPIO.setup(18, GPIO.IN)
+        #button = Button(18)
+        btn = bellcam.button.value
+        #GPIO.cleanup()
         return btn
 
 # btn = button.value()

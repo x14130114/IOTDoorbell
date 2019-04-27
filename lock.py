@@ -11,10 +11,9 @@ class Solenoid:
         print ("in lock")
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(lock, GPIO.OUT)
-        GPIO.output(lock, GPIO.HIGH)  # Turn motor on
+        GPIO.output(lock, GPIO.LOW)  # Turn motor on
         time.sleep(5)
-        #GPIO.output(lock, GPIO.LOW)
-        GPIO.cleanup()
+        GPIO.cleanup(21)
         print ("finish")
 
     #if __name__ == '__main__':
