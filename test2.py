@@ -42,8 +42,8 @@ if __name__ == '__main__':
         print (res)
         #res[0] = id
         #print (id)
-        sleep(.5)
-        if res is not None and res[1] < 65:
+        #sleep(.5)
+        if res is not None and res[1] < 77:
             id = res[0]
             t = Thread(target=check)
             t.start()

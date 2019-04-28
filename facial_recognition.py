@@ -1,9 +1,5 @@
 """
-Author: Jan Kowal
 
-Description:
-
-This class is handling all facial recognition related operations
 """
 
 import cv2
